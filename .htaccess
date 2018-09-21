@@ -1,0 +1,13 @@
+# Author: Abdelrahman Mohamed
+# Contact: < Abdo.Tasks@Gmail.Com , https://Github.com/abd0m0hamed >
+# Project: A0 PHP Lightweight Framework (A0 for Abdo). 
+# Description: Simple & Fast & Lightweight PHP Framework to quickly Create website.
+# License: Science not for Monopoly.
+
+RewriteEngine on
+<IfModule mod_rewrite.c>
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$  includes/controller.php/$1 [QSA,L]
+</IfModule>
+

@@ -1,0 +1,4 @@
+<div>Common footer</div>
+
+
+
