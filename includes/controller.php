@@ -1,58 +1,19 @@
 <?php
 /*
-* Author: Abdelrahman Mohamed
-* Contact: < Abdo.Tasks@Gmail.Com , https://Github.com/abd0m0hamed >
+* Author: Abdelrahman Helaly
+* Contact: < AH3laly@gmail.com , https://Github.com/AH3laly >
 * Project: A0 PHP Lightweight Framework (A0 for Abdo). 
 * Description: Simple & Fast & Lightweight PHP Framework to quickly Create website.
 * License: Science not for Monopoly.
 */
 
-define("URI_index", "http://localhost/A0PHPFramework/");
-define("Default_theme", "default");
-define("Maintenance_Mode", false);
-ini_set('display_errors', "off");
-ini_set('error_reporting', E_ALL);
-ini_set("memory_limit", "1024M");
-date_default_timezone_set("Africa/Cairo");
-ini_set('session.cookie_lifetime', 86400);
-ini_set('session.gc_maxlifetime',86400);
-
 session_start();
-
-define("URI_upload", URI_index . "upload/");
-define("URI_theme", URI_index."themes/".Default_theme."/");
-
-define("FOLDER_includes", __DIR__ . "/");
-define("FOLDER_root", FOLDER_includes . "../");
-define("FOLDER_themes", FOLDER_root . "themes"."/".Default_theme."/");
-define("FOLDER_templates", FOLDER_includes . "templates/");
-define("FOLDER_journalExports", FOLDER_root . "journalExports/");
-define("FOLDER_upload", FOLDER_root . "upload/");
-define("FOLDER_uploadOld",FOLDER_root."../databox/upload/");
-define("FOLDER_images", FOLDER_root."images/");
-
-define("MESSAGE_info", "info");
-define("MESSAGE_confirm", "confirm");
-define("MESSAGE_warning", "warning");
-define("MESSAGE_error", "error");
-
-define("CONSTANT_MAX_AD_IMAGES", 10);
-define('UTF32_BIG_ENDIAN_BOM'   , chr(0x00) . chr(0x00) . chr(0xFE) . chr(0xFF));
-define('UTF32_LITTLE_ENDIAN_BOM', chr(0xFF) . chr(0xFE) . chr(0x00) . chr(0x00));
-define('UTF16_BIG_ENDIAN_BOM'   , chr(0xFE) . chr(0xFF));
-define('UTF16_LITTLE_ENDIAN_BOM', chr(0xFF) . chr(0xFE));
-define('UTF8_BOM'               , chr(0xEF) . chr(0xBB) . chr(0xBF));
-
 $startupTime = microtime(true);
 
-if(isset($_REQUEST["debug"])){
-    ini_set('display_errors', "on");
-}
+$config = require_once 'config.php';
 
-if(Maintenance_Mode)
-{
-    echo "<div style='margin: auto; padding: 10px; background-color:#000; text-align:center;'><img src='".URI_index."assets/img/maintenance.jpg'/></div>";
-    exit;
+if(DEBUG_MODE && isset($_REQUEST["debug"])){
+    ini_set('display_errors', "on");
 }
 
 //Handling autoload
@@ -66,24 +27,26 @@ spl_autoload_register(function($class)
 });
 
 $A0 = new \A0\core();
-$A0->config = require_once 'config.php';
-$A0->db->connect($A0->config['database']['username'], $A0->config['database']['password'],$A0->config['database']['name'],$A0->config['database']['host']);
-
 function A0()
 {
     global $A0;
     return $A0;
 }
 
+A0()->config = $config;
+unset($config);
+
+A0()->db->connect($A0->config['database']['username'], $A0->config['database']['password'],$A0->config['database']['name'],$A0->config['database']['host']);
+
 set_error_handler(function($errno,$errstr,$errfile,$errline,$errcontext){
-    if(A0()->config['debug'])
+    if(DEBUG_MODE)
     {
         A0()->__errors[] = "<b>errNo:</b> {$errno} , <b>errStr:</b> {$errstr} , <b>errFile:</b> {$errfile} , <b>errLine:</b> {$errline}";
     }
 });
 
 register_shutdown_function(function(){
-    if(A0()->config['debug'])
+    if(DEBUG_MODE)
     {
         if(count(A0()->__errors)>0)
         {
@@ -96,6 +59,12 @@ register_shutdown_function(function(){
 });
 
 require_once("helpers.php");
+
+if(Maintenance_Mode)
+{
+    echo "<div style='margin: auto; padding: 10px; background-color:#000; text-align:center;'><img src='".URI_index."assets/img/maintenance.jpg'/></div>";
+    exit;
+}
 
 A0()->secureRequest();
 

@@ -1,7 +1,7 @@
 <?php
 /*
-* Author: Abdelrahman Mohamed
-* Contact: < Abdo.Tasks@Gmail.Com , https://Github.com/abd0m0hamed >
+* Author: Abdelrahman Helaly
+* Contact: < AH3laly@gmail.com , https://Github.com/AH3laly >
 * Project: A0 PHP Lightweight Framework (A0 for Abdo). 
 * Description: Simple & Fast & Lightweight PHP Framework to quickly Create website.
 * License: Science not for Monopoly.
@@ -18,9 +18,9 @@ class customer {
         // $args[1] = Parameter 2
         
         $data = [
-            "name"=>"Abdelrahman Mohamed",
-            "github"=>"https://github.com/abd0m0hamed",
-            "email"=>"Abdo.Tasks@Gmail.com"
+            "name"=>"Abdelrahman Helaly",
+            "github"=>"https://Github.com/AH3laly",
+            "email"=>"AH3laly@gmail.com"
         ];
         
         $customerObject = new \models\customer();

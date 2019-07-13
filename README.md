@@ -10,7 +10,6 @@
 * <b>includes/templates</b> : HTML Templates.
 * <b>includes/data</b> : Cache and temp files.
 * <b>includes/config.php</b> : Database & mail config.
-* <b>includes/controller.php</b> : General config.
 * <b>includes/helpers.php</b> : Any General purpose helpers.
 * <b>commands</b> : Any CLI commands should be place here.
 
@@ -21,11 +20,10 @@
 * Set database configuration.
 * Set Mail server configuration.
 * Change <b>security["encryption_token"]</b> to something generic (use command php -f commands/genkey.php to generate a new one)
-* From <b>includes/controller.php</b>:
-  * Change <b>URI_index</b> to your URL path.
-  * Set your timezone.
-  * To enable Mantainance Mode set <b>Maintenance_Mode = true</b>
-  * Enable or Disable error reporting using display_errors function.
+* Change <b>URI_index</b> to your URL path.
+* Set your timezone.
+* To enable Mantainance Mode set <b>Maintenance_Mode = true</b>
+* Enable or Disable error reporting using display_errors function.
 
 
 

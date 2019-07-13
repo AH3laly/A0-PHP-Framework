@@ -63,7 +63,7 @@ angular.module('ui.date', [])
             var date = controller.$viewValue;
             
             
-            //Added By Abdelrahman Mohamed to fix probelm in binding dates to ng-model 2017-11-26 17:45
+            //Added By Abdelrahman Helaly to fix probelm in binding dates to ng-model 2017-11-26 17:45
             if(date !== null) {
                 date = new Date(date);
                 //window.alert(date + ' : ' + angular.isDate(new Date(date)));
